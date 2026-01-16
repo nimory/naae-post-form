@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>NAAE 事業場切替→日別予約状況</title>
+</head>
+<body>
+  <form id="f" method="post" action="http://gp400.kao.local/NAAE/Common/Menu.asp">
+    <input type="hidden" name="hdnExFlg" value="1">
+    <input type="hidden" name="hdnJigyojoChange" value="YES">
+    <input type="hidden" name="hdnMenuMemo" value="OFF">
+    <input type="hidden" name="hdnMyReserve" value="OFF">
+    <input type="hidden" name="selJigyojo" value="M4">
+    <!-- menu.asp が subAction を見てる場合があるので、必要ならこれも -->
+    <!-- <input type="hidden" name="subAction" value="..."> -->
+  </form>
+
+  <script>
+    // まず Main.asp に飛ばされる問題の多くが「Session/Cookie未成立」なので、
+    // 先に同一オリジンで1回踏んで Cookie を作らせたい場合は 2段階にします。
+    // ただし社内認証やIEモードの挙動次第で不要なこともあります。
+
+    // 1) まず Main.asp を別窓で開く（Cookie確立目的）
+    // window.open("http://gp400.kao.local/NAAE/List/Main.asp", "_self");
+
+    // 2) その直後に menu.asp へPOST（事業場切替を成立させる）
+    document.getElementById("f").submit();
+  </script>
+</body>
+</html>
+
